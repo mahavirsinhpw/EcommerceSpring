@@ -10,5 +10,5 @@ public interface ICategoryService {
 
     List<CategoryDTO> getALlCategories() throws IOException;
 
-    List<ProductDTO> getProductsByCategory(String category)throws IOException;
+
 }

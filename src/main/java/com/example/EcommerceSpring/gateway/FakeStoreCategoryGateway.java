@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class FakeStoreCategoryGateway implements ICategoryGateway{
@@ -31,34 +32,5 @@ public class FakeStoreCategoryGateway implements ICategoryGateway{
                                 .toList();
     }
 
-    @Override
-    public List<ProductDTO> getProductsByCategory(String category) throws IOException {
-        FakeStoreProductResponseDTO responseDTO = fakeStoreCategoryApi.getProductsByCategory(category).execute().body();
-        if (responseDTO == null){
-            throw  new IOException("failed to fetch products from fake store api");
-        }
 
-        return responseDTO.getProducts().stream()
-                .map(
-                        productDTO -> ProductDTO.builder()
-                                .id(productDTO.getId())
-                                .category(productDTO.getCategory())
-                                .brand(productDTO.getBrand())
-                                .color(productDTO.getColor())
-                                .model(productDTO.getModel())
-                                .price(productDTO.getPrice())
-                                .title(productDTO.getTitle())
-                                .description(productDTO.getDescription())
-                                .image(productDTO.getImage())
-                                .onSale(productDTO.isOnSale())
-                                .discount(productDTO.getDiscount()).build()
-                ).toList();
-
-
-
-
-//        responseDTO.getProducts()
-//                .stream()
-//                .map()
-    }
 }

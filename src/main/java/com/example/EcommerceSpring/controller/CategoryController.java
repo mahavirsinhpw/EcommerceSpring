@@ -5,6 +5,7 @@ import com.example.EcommerceSpring.dto.ProductDTO;
 import com.example.EcommerceSpring.service.ICategoryService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.plaf.SpinnerUI;
 import java.io.IOException;
 import java.util.List;
 
@@ -24,9 +25,6 @@ public class CategoryController {
         return iCategoryService.getALlCategories();
     }
 
-    @GetMapping("/{category}")
-    public List<ProductDTO> getProductsByCategory(@PathVariable String category) throws IOException{
-        return iCategoryService.getProductsByCategory(category);
-    }
+
 
 }

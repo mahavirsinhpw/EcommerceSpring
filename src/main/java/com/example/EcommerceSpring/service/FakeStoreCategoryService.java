@@ -23,9 +23,6 @@ public class FakeStoreCategoryService implements ICategoryService{
         return iCategoryGateway.getAllCategories();
     }
 
-    @Override
-    public List<ProductDTO> getProductsByCategory(String category) throws IOException {
-        return iCategoryGateway.getProductsByCategory(category);
-    }
+
 
 }
