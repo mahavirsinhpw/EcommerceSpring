@@ -4,7 +4,6 @@ import com.example.EcommerceSpring.configuration.FakeStoreApiConfig;
 import com.example.EcommerceSpring.dto.FakeStoreProductResponseDTO;
 import com.example.EcommerceSpring.dto.FakeStoreSingleProductResponseDTO;
 import com.example.EcommerceSpring.dto.ProductDTO;
-import com.example.EcommerceSpring.gateway.api.FakeStoreCategoryApi;
 import com.example.EcommerceSpring.gateway.api.FakeStoreProductApi;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.OkHttpClient;
@@ -16,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Component
-public class FakeStoreProductGateway implements IProductGateway {
+public class FakeStoreProductOkHttpAndRetrofitGateway implements IProductGateway {
 
 
 //    private static final String baseUrl = System.getProperty("fakeStoreApi_base_url");
@@ -28,7 +27,7 @@ public class FakeStoreProductGateway implements IProductGateway {
 
 
 
-    public FakeStoreProductGateway(OkHttpClient client, FakeStoreProductApi fakeStoreProductApi,FakeStoreApiConfig fakeStoreApiConfig){
+    public FakeStoreProductOkHttpAndRetrofitGateway(OkHttpClient client, FakeStoreProductApi fakeStoreProductApi, FakeStoreApiConfig fakeStoreApiConfig){
         this.client = client;
         this.fakeStoreProductApi = fakeStoreProductApi;
         this.fakeStoreApiConfig = fakeStoreApiConfig;

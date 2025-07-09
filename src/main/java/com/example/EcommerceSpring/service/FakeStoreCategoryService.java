@@ -1,9 +1,8 @@
 package com.example.EcommerceSpring.service;
 
 import com.example.EcommerceSpring.dto.CategoryDTO;
-import com.example.EcommerceSpring.dto.ProductDTO;
-import com.example.EcommerceSpring.gateway.FakeStoreCategoryGateway;
 import com.example.EcommerceSpring.gateway.ICategoryGateway;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -14,7 +13,7 @@ public class FakeStoreCategoryService implements ICategoryService{
 
     private final ICategoryGateway iCategoryGateway;
 
-    public FakeStoreCategoryService(ICategoryGateway iCategoryGateway){
+    public FakeStoreCategoryService(@Qualifier("fakeStoreCategoryRestTemplateGateway")ICategoryGateway iCategoryGateway){
         this.iCategoryGateway = iCategoryGateway;
     }
 
