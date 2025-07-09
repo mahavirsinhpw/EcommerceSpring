@@ -13,16 +13,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitConfig {
 
 
-    private static final String base_url = System.getProperty("fakeStoreApi_base_url");
+//    private static final String base_url = System.getProperty("fakeStoreApi_base_url");
 
-//    @Value("${base}")
-//    private String base_url;
 
     @Bean
-    public Retrofit retrofit(){
+    public Retrofit retrofit(FakeStoreApiConfig fakeStoreApiConfig){
         return new Retrofit
                 .Builder()
-                .baseUrl(base_url)
+                .baseUrl(fakeStoreApiConfig.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }

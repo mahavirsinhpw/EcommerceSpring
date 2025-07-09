@@ -1,5 +1,6 @@
 package com.example.EcommerceSpring.gateway;
 
+import com.example.EcommerceSpring.configuration.FakeStoreApiConfig;
 import com.example.EcommerceSpring.dto.FakeStoreProductResponseDTO;
 import com.example.EcommerceSpring.dto.FakeStoreSingleProductResponseDTO;
 import com.example.EcommerceSpring.dto.ProductDTO;
@@ -18,22 +19,20 @@ import java.util.List;
 public class FakeStoreProductGateway implements IProductGateway {
 
 
-    private static final String baseUrl = System.getProperty("fakeStoreApi_base_url");
+//    private static final String baseUrl = System.getProperty("fakeStoreApi_base_url");
 
 
     private final OkHttpClient client;
     private final FakeStoreProductApi fakeStoreProductApi;
+    private final FakeStoreApiConfig fakeStoreApiConfig;
 
 
 
-
-    public FakeStoreProductGateway(OkHttpClient client, FakeStoreProductApi fakeStoreProductApi){
+    public FakeStoreProductGateway(OkHttpClient client, FakeStoreProductApi fakeStoreProductApi,FakeStoreApiConfig fakeStoreApiConfig){
         this.client = client;
         this.fakeStoreProductApi = fakeStoreProductApi;
+        this.fakeStoreApiConfig = fakeStoreApiConfig;
     }
-
-
-
 
 
 
@@ -91,6 +90,8 @@ public class FakeStoreProductGateway implements IProductGateway {
     @Override
     public List<ProductDTO> fetchAllProducts() throws IOException{
 
+
+        String baseUrl = fakeStoreApiConfig.getBaseUrl();
         String url = baseUrl + "products";
 
         Request request = new Request
@@ -100,7 +101,7 @@ public class FakeStoreProductGateway implements IProductGateway {
 
         try (Response response = client.newCall(request).execute()){
             if (response == null){
-                throw new IOException("failed to fetch product from fakeStore api");
+                throw new IOException("failed to fetch products from fakeStore api");
             }
 
             String json = response.body().string(); // get raw JSON
