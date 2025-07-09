@@ -3,6 +3,7 @@ package com.example.EcommerceSpring.controller;
 import com.example.EcommerceSpring.dto.CategoryDTO;
 import com.example.EcommerceSpring.dto.ProductDTO;
 import com.example.EcommerceSpring.service.ICategoryService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.plaf.SpinnerUI;
@@ -21,8 +22,9 @@ public class CategoryController {
     }
 
     @GetMapping
-    public List<CategoryDTO> getAllCategories() throws IOException {
-        return iCategoryService.getALlCategories();
+    public ResponseEntity<List<CategoryDTO>> getAllCategories() throws IOException {
+        List<CategoryDTO> categories = this.iCategoryService.getALlCategories();
+        return ResponseEntity.ok(categories);
     }
 
 
