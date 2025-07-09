@@ -30,4 +30,9 @@ public class ProductController {
     public ProductDTO getProductById(@PathVariable int id) throws IOException{
         return iProductService.getProductById(id);
     }
+
+    @GetMapping("/getAll")
+    public  List<ProductDTO> getAllProductsViaOkHttp() throws IOException{
+        return iProductService.getAllProducts();
+    }
 }

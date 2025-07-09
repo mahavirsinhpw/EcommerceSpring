@@ -2,6 +2,7 @@ package com.example.EcommerceSpring.configuration;
 
 import com.example.EcommerceSpring.gateway.api.FakeStoreCategoryApi;
 import com.example.EcommerceSpring.gateway.api.FakeStoreProductApi;
+import okhttp3.Request;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,4 +36,6 @@ public class RetrofitConfig {
     public FakeStoreProductApi fakeStoreProductApi(Retrofit retrofit){
         return retrofit.create(FakeStoreProductApi.class);
     }
+
+
 }

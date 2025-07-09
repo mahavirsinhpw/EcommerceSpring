@@ -26,4 +26,11 @@ public class FakeStoreProductService implements IProductService{
     public ProductDTO getProductById(int id) throws IOException {
         return iProductGateway.getProductById(id);
     }
+
+    @Override
+    public List<ProductDTO> getAllProducts() throws IOException {
+        return iProductGateway.fetchAllProducts();
+    }
+
+
 }

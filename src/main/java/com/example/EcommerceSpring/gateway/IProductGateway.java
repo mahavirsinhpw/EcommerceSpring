@@ -10,4 +10,7 @@ public interface IProductGateway {
     List<ProductDTO> getProductsByCategory(String category) throws IOException;
 
     ProductDTO getProductById(int id) throws IOException;
+
+    List<ProductDTO> fetchAllProducts() throws IOException;
+
 }

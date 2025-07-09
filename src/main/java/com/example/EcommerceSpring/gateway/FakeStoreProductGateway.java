@@ -5,6 +5,10 @@ import com.example.EcommerceSpring.dto.FakeStoreSingleProductResponseDTO;
 import com.example.EcommerceSpring.dto.ProductDTO;
 import com.example.EcommerceSpring.gateway.api.FakeStoreCategoryApi;
 import com.example.EcommerceSpring.gateway.api.FakeStoreProductApi;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -13,11 +17,23 @@ import java.util.List;
 @Component
 public class FakeStoreProductGateway implements IProductGateway {
 
+
+    private static final String baseUrl = System.getProperty("fakeStoreApi_base_url");
+
+
+    private final OkHttpClient client;
     private final FakeStoreProductApi fakeStoreProductApi;
 
-    public FakeStoreProductGateway(FakeStoreProductApi fakeStoreProductApi){
-         this.fakeStoreProductApi = fakeStoreProductApi;
+
+
+
+    public FakeStoreProductGateway(OkHttpClient client, FakeStoreProductApi fakeStoreProductApi){
+        this.client = client;
+        this.fakeStoreProductApi = fakeStoreProductApi;
     }
+
+
+
 
 
 
@@ -71,4 +87,29 @@ public class FakeStoreProductGateway implements IProductGateway {
                 .build();
 
     }
+
+    @Override
+    public List<ProductDTO> fetchAllProducts() throws IOException{
+
+        String url = baseUrl + "products";
+
+        Request request = new Request
+                .Builder()
+                .url(url)
+                .build();
+
+        try (Response response = client.newCall(request).execute()){
+            if (response == null){
+                throw new IOException("failed to fetch product from fakeStore api");
+            }
+
+            String json = response.body().string(); // get raw JSON
+            ObjectMapper mapper = new ObjectMapper();
+            FakeStoreProductResponseDTO responseDTO = mapper.readValue(json, FakeStoreProductResponseDTO.class);
+            List<ProductDTO> products = responseDTO.getProducts();
+            return products;
+
+        }
+    }
+
 }

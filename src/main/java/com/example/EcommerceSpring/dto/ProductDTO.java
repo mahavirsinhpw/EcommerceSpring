@@ -20,6 +20,7 @@ public class ProductDTO {
     private String model;
     private String color;
     private String category;
+    private Boolean popular;
     private int discount;
     private boolean onSale;
 
