@@ -9,7 +9,9 @@ public interface IProductService {
 
     List<ProductDTO> getProductsByCategory(String category)throws IOException;
 
-    ProductDTO getProductById(int id) throws  IOException;
+    ProductDTO getProductById(Long id) throws  IOException;
 
     List<ProductDTO> getAllProducts() throws IOException;
+
+    ProductDTO createProduct(ProductDTO productDTO);
 }

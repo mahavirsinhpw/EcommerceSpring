@@ -1,8 +1,6 @@
 package com.example.EcommerceSpring.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -22,8 +20,13 @@ public class Product extends BaseEntity{
     private String brand;
     private String model;
     private String color;
-    private String category;
+//  private String category;
     private Boolean popular;
     private int discount;
     private boolean onSale;
+
+    @ManyToOne
+    @JoinColumn(name = "categoryId",nullable = false)
+    private Category category;
+
 }

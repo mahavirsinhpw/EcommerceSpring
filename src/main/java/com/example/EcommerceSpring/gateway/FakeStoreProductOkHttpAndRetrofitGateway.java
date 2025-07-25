@@ -46,7 +46,7 @@ public class FakeStoreProductOkHttpAndRetrofitGateway implements IProductGateway
                 .map(
                         productDTO -> ProductDTO.builder()
                                 .id(productDTO.getId())
-                                .category(productDTO.getCategory())
+                                .categoryId(productDTO.getCategoryId())
                                 .brand(productDTO.getBrand())
                                 .color(productDTO.getColor())
                                 .model(productDTO.getModel())
@@ -61,7 +61,7 @@ public class FakeStoreProductOkHttpAndRetrofitGateway implements IProductGateway
     }
 
     @Override
-    public ProductDTO getProductById(int id) throws IOException {
+    public ProductDTO getProductById(Long id) throws IOException {
         FakeStoreSingleProductResponseDTO responseDTO = fakeStoreProductApi.getProduct(id).execute().body();
 
         if (responseDTO == null){
@@ -71,7 +71,7 @@ public class FakeStoreProductOkHttpAndRetrofitGateway implements IProductGateway
         ProductDTO productDTO = responseDTO.getProduct();
 
        return ProductDTO.builder()
-                .category(productDTO.getCategory())
+               .categoryId(productDTO.getCategoryId())
                 .image(productDTO.getImage())
                 .brand(productDTO.getBrand())
                 .color(productDTO.getColor())

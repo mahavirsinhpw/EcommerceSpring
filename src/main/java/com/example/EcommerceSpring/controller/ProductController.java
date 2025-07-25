@@ -2,11 +2,9 @@ package com.example.EcommerceSpring.controller;
 
 import com.example.EcommerceSpring.dto.ProductDTO;
 import com.example.EcommerceSpring.service.IProductService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,7 +15,7 @@ public class ProductController {
 
     private IProductService iProductService;
 
-    public ProductController(IProductService iProductService){
+    public ProductController(@Qualifier("productService") IProductService iProductService){
         this.iProductService = iProductService;
     }
 
@@ -28,7 +26,7 @@ public class ProductController {
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<ProductDTO> getProductById(@PathVariable int id) throws IOException{
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) throws IOException{
         ProductDTO productDTO = this.iProductService.getProductById(id);
         return ResponseEntity.ok(productDTO);
     }
@@ -37,5 +35,12 @@ public class ProductController {
     public  ResponseEntity<List<ProductDTO>> getAllProductsViaOkHttp() throws IOException{
         List<ProductDTO> products = this.iProductService.getAllProducts();
         return ResponseEntity.ok(products);
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO){
+        ProductDTO product = this.iProductService.createProduct(productDTO);
+        return ResponseEntity.ok(product);
+
     }
 }

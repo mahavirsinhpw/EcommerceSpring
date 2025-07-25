@@ -22,6 +22,10 @@ public class FakeStoreCategoryService implements ICategoryService{
         return iCategoryGateway.getAllCategories();
     }
 
+    @Override
+    public CategoryDTO createCategory(CategoryDTO categoryDTO) {
+        return null;
+    }
 
 
 }

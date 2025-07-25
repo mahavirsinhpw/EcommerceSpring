@@ -17,7 +17,7 @@ public interface FakeStoreProductApi {
     Call<FakeStoreProductResponseDTO> getProductsByCategory(@Query("type") String type) throws IOException;
 
     @GET("products/{id}")
-    Call<FakeStoreSingleProductResponseDTO> getProduct(@Path("id") int id) throws IOException;
+    Call<FakeStoreSingleProductResponseDTO> getProduct(@Path("id") Long id) throws IOException;
 
 
 }
